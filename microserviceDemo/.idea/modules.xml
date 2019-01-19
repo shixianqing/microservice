@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microserviceDemo.iml" filepath="$PROJECT_DIR$/microserviceDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-customer/service-customer.iml" filepath="$PROJECT_DIR$/service-customer/service-customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-customer-ribbon/service-customer-ribbon.iml" filepath="$PROJECT_DIR$/service-customer-ribbon/service-customer-ribbon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-customer-ribbon-config/service-customer-ribbon-config.iml" filepath="$PROJECT_DIR$/service-customer-ribbon-config/service-customer-ribbon-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-hystrix/service-hystrix.iml" filepath="$PROJECT_DIR$/service-hystrix/service-hystrix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/service-provider.iml" filepath="$PROJECT_DIR$/service-provider/service-provider.iml" />
+    </modules>
+  </component>
+</project>
