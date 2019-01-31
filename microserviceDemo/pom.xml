@@ -22,6 +22,7 @@
         <module>eureka-server</module>
       <module>service-hystrix</module>
       <module>service-customer-ribbon-config</module>
+        <module>service-customer-feign</module>
     </modules>
 
     <name>microserviceDemo</name>
