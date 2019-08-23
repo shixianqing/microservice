@@ -18,7 +18,7 @@ import java.util.Random;
  * @Description:
  **/
 @RestController
-@RequestMapping(value = "/user",produces = {"application/json;charset=utf-8"})
+@RequestMapping(value = "/user", produces = {"application/json;charset=utf-8"})
 public class UserController {
 
     @Autowired
@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("/query")
-    public String query(){
-        ServiceInstance serviceInstance =  discoveryClient.getInstances("service-provider").get(0);
+    public String query() {
+        ServiceInstance serviceInstance = discoveryClient.getInstances("service-provider").get(0);
         return serviceInstance.getUri().toString();
     }
 }
