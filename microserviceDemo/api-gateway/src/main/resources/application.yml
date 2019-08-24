@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 10000
+zuul:
+  routes:
+    api:
+      path:
+        /api/**
+      url:
+        https://www.baidu.com
+    service-provider:
+      path:
+        /service-provider/**
+      url:
+        http://localhost:9001/
