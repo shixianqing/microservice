@@ -70,4 +70,10 @@ public class StoreController {
         System.out.println("接收请求id："+id);
         return Store.builder().id(id).storeName("测试").build();
     }
+
+    @GetMapping("/query/store")
+    public Store query(Store store){
+
+        return store;
+    }
 }

@@ -24,13 +24,19 @@ public class UserController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
-    @GetMapping("/query/{id}")
-    public User getUser(@PathVariable("id") Integer userId) throws InterruptedException {
+    @GetMapping("/query/{userId}")
+    public User getUser(@PathVariable("userId") Integer userId) throws InterruptedException {
         int sleepTime = new Random().nextInt(3000);
         Thread.sleep(sleepTime);
         User user = new User();
         user.setUserId(userId);
         user.setDate(new Date());
+        return user;
+    }
+
+    @GetMapping("/get")
+    public User getUser(User user){
+
         return user;
     }
 

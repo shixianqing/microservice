@@ -2,6 +2,7 @@ package com.study.microservice.feign;
 
 import com.study.microservice.Model.Store;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +43,7 @@ import java.util.List;
  * @Date:2019/8/23 15:26
  * @Description:
  **/
-@FeignClient(value = "service-provider",qualifier = "storeService")
+@FeignClient(value = "service-provider",qualifier = "storeService",contextId = "storeClient")
 public interface StoreClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/stores")
@@ -60,4 +61,10 @@ public interface StoreClient {
 
     @GetMapping("/query/{id}")
     Store queryById(@PathVariable("id") Integer id);
+
+    @GetMapping("/test")
+    Object query();
+
+    @GetMapping("/query/store")
+    Store query(@SpringQueryMap Store store);
 }

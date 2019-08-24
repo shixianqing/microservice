@@ -1,12 +1,16 @@
 package com.study.microservice.controller;
 
 import com.study.microservice.Model.Store;
+import com.study.microservice.Model.User;
+import com.study.microservice.feign.HystrixClient;
 import com.study.microservice.feign.StoreClient;
+import com.study.microservice.feign.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,10 +55,16 @@ public class TestFeignController {
     @Autowired
     private StoreClient storeClient;
 
+    @Autowired
+    private UserClient userClient;
+
+    @Autowired
+    private HystrixClient hystrixClient;
+
     @GetMapping("/query")
     public List<Store> query(){
 
-        return storeClient.getStores();
+        return hystrixClient.getStores();
     }
 
     @GetMapping("/add")
@@ -66,5 +76,19 @@ public class TestFeignController {
     @GetMapping("/query/{id}")
     public Store queryById(@PathVariable Integer id){
         return storeClient.queryById(id);
+    }
+
+    @GetMapping("/test")
+    public Object test(){
+        Store store = Store.builder().id(2).storeName("测试").build();
+        return storeClient.query(store);
+    }
+
+    @GetMapping("/user/query")
+    public User userQuery(){
+        User user = new User();
+        user.setDate(new Date());
+        user.setUserId(2);
+        return userClient.getUser(user);
     }
 }
