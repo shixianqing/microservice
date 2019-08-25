@@ -23,6 +23,7 @@
         <module>service-hystrix</module>
         <module>service-customer-ribbon-config</module>
         <module>service-customer-feign</module>
+        <module>api-gateway</module>
     </modules>
 
     <name>microserviceDemo</name>

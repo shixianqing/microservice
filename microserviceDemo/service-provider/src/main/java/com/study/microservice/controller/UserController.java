@@ -26,8 +26,8 @@ public class UserController {
 
     @GetMapping("/query/{userId}")
     public User getUser(@PathVariable("userId") Integer userId) throws InterruptedException {
-        int sleepTime = new Random().nextInt(3000);
-        Thread.sleep(sleepTime);
+//        int sleepTime = new Random().nextInt(3000);
+//        Thread.sleep(sleepTime);
         User user = new User();
         user.setUserId(userId);
         user.setDate(new Date());
