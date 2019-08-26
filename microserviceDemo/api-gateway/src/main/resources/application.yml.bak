@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 10000
+
+#传统路由转发
+#zuul:
+#  routes:
+#    api:
+#      path:
+#        /api/**
+#      url:
+#        https://www.baidu.com
+#    service-provider:
+#      path:
+#        /service-provider/**
+#      url:
+#        http://localhost:9001/
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://admin:admin@localhost:8000/eureka/
+
+#面向服务路由
+#zuul:
+#  routes:
+#    service-provider:
+#      path:
+#        /service-provider/**
+#      serviceId:
+#        service-provider
+
+
+zuul:
+  routes:
+    service-provider:
+      /service-provider/**
+    service-customer-feign:
+      /service-customer-feign/**
+  ignored-services: service-9i,service-customer-feign
+#service-provider.ribbon.timeout=

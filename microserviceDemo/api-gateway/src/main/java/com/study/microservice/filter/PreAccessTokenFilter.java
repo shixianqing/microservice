@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date:2019/8/23 15:26
  * @Description:
  **/
-@Component
+//@Component
 public class PreAccessTokenFilter extends ZuulFilter {
 
     /**

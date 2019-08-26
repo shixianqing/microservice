@@ -4,7 +4,7 @@ spring:
 server:
   port: 10000
 
-#��ͳ·��ת��
+#传统路由
 #zuul:
 #  routes:
 #    api:
@@ -24,22 +24,37 @@ eureka:
     service-url:
       defaultZone:
         http://admin:admin@localhost:8000/eureka/
-
-#�������·��
-#zuul:
-#  routes:
-#    service-provider:
-#      path:
-#        /service-provider/**
-#      serviceId:
-#        service-provider
-
+    enabled: false
 
 zuul:
   routes:
+    service-provider.path: /service-provider/**
+    service-provider.serviceId: service-provider
+
+service-provider:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:9001/,http://localhost:9002/
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+
+hystrix:
+  command:
     service-provider:
-      /service-provider/**
-    service-customer-feign:
-      /service-customer-feign/**
-  ignored-services: service-9i,service-customer-feign
-#service-provider.ribbon.timeout=
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+# 暴露routes端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #注意这里*要加引号，暴露全部，也可以只暴露相应endpoint
+  endpoint:
+    routes:
+      enabled: true # 默认为true，可以省略
+ribbon:
+  eureka:
+    enabled: false #禁用Ribbon中的Eureka支持
