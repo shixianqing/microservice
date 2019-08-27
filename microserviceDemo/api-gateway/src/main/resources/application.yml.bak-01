@@ -24,7 +24,27 @@ eureka:
     service-url:
       defaultZone:
         http://admin:admin@localhost:8000/eureka/
+    enabled: false
 
+zuul:
+  routes:
+    service-provider.path: /service-provider/**
+    service-provider.serviceId: service-provider
+
+service-provider:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:9001/,http://localhost:9002/
+    ConnectTimeout: 1000 #ribbon连接超时时间
+    ReadTimeout: 4000 #ribbon读取超时时间
+
+hystrix:
+  command:
+    service-provider:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 # 熔断超时时间
 
 # 暴露routes端点
 management:
@@ -35,25 +55,6 @@ management:
   endpoint:
     routes:
       enabled: true # 默认为true，可以省略
-
-#ribbon:
-#  ReadTimeout: 500
-#  SocketTimeout: 5000
-
-# 局部超时设置
-service-provider:
-  ribbon:
-    ReadTimeout: 500
-    SocketTimeout: 5000
-service-provider-v1:
-  ribbon:
-    ReadTimeout: 5000
-    SocketTimeout: 5000
-
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 1000
+ribbon:
+  eureka:
+    enabled: false #禁用Ribbon中的Eureka支持

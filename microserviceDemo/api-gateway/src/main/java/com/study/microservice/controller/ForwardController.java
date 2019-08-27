@@ -1,12 +1,7 @@
 package com.study.microservice.controller;
 
-import com.netflix.discovery.EurekaClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Random;
 
 /**
  * *                            _ooOoo_
@@ -41,23 +36,15 @@ import java.util.Random;
  * *                  不见满街漂亮妹，哪个归得程序员？
  *
  * @Author:shixianqing
- * @Date:2019/8/23 15:26
+ * @Date:2019/8/26 19:14
  * @Description:
  **/
 @RestController
-@RequestMapping(value = "/hystrix")
-public class TestHystrixController {
+public class ForwardController {
 
-    @Autowired
-    private EurekaClient eurekaClient;
-    @GetMapping("/test")
-    public String test() throws InterruptedException {
-        int nextInt = new Random().nextInt(3000);
-        System.out.println(nextInt);
-        Thread.sleep(nextInt);
-        return eurekaClient.getApplicationInfoManager().getInfo().getPort() +"";
+    @GetMapping("/forward")
+    public String forward(){
+
+        return "本地跳转成功";
     }
-
 }
-
-

@@ -1,12 +1,9 @@
-package com.study.microservice.controller;
+package com.study.microservice.cross;
 
-import com.netflix.discovery.EurekaClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Random;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * *                            _ooOoo_
@@ -41,23 +38,22 @@ import java.util.Random;
  * *                  不见满街漂亮妹，哪个归得程序员？
  *
  * @Author:shixianqing
- * @Date:2019/8/23 15:26
- * @Description:
+ * @Date:2019/8/27 17:12
+ * @Description: 解决跨域请求
  **/
-@RestController
-@RequestMapping(value = "/hystrix")
-public class TestHystrixController {
+@Configuration
+public class ZuulConfig {
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/path-1/**")
+                        .allowedOrigins("https://allowed-origin.com")
+                        .allowedMethods("GET", "POST");
+            }
+        };
 
-    @Autowired
-    private EurekaClient eurekaClient;
-    @GetMapping("/test")
-    public String test() throws InterruptedException {
-        int nextInt = new Random().nextInt(3000);
-        System.out.println(nextInt);
-        Thread.sleep(nextInt);
-        return eurekaClient.getApplicationInfoManager().getInfo().getPort() +"";
     }
 
 }
-
-
