@@ -15,7 +15,7 @@ public class CustomerBeanConfig {
 
     @Bean
     @LoadBalanced
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
 }
